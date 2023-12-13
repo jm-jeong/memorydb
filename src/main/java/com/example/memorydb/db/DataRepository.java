@@ -12,4 +12,6 @@ public interface DataRepository<T, ID> extends Repository<T, ID> {
 
     List<T> findAll();
     void delete(ID id);
+
+    List<T> findGreaterThanScore(int score);
 }
