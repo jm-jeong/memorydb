@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserApiController {
 
@@ -21,25 +21,30 @@ public class UserApiController {
         return userService.save(userEntity);
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<UserEntity> findAll() {
         return userService.findAll();
     }
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         userService.delete(id);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public UserEntity findOne(@PathVariable Long id) {
         UserEntity findEntity = userService.findById(id).get();
         return findEntity;
     }
 
-    @GetMapping("/all")
-    public List<UserEntity> findOne(@RequestParam Integer score) {
+    @GetMapping("/score")
+    public List<UserEntity> findScore(@RequestParam Integer score) {
         return userService.findGreaterThanScore(score);
+    }
+
+    @GetMapping("/minmax")
+    public List<UserEntity> findMinMax(@RequestParam Integer min, @RequestParam Integer max) {
+        return userService.findScoreMinMax(min, max);
     }
 
 
